@@ -1,26 +1,1119 @@
 @import "tailwindcss";
+/* globals.css */
 
+/* ------------------------------ */
+/* 1. THEME & VARIABLE DEFINITIONS
+/* ------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors */
+  --bg-default: #18181B;
+  --bg-subtle: #27272A;
+  --fg-default: #E4E4E7;
+  --fg-muted: #A1A1AA;
+  --fg-accent: #FFFFFF;
+  --border-default: #27272A;
+  --border-strong: #3f3f46;
+  --accent-green: #34D399;
+  --accent-blue: #3B82F6;
+  --ring-color: rgba(59, 130, 246, 0.5); /* Blue glow for focus */
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Sizing & Radius */
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ------------------------------ */
+/* 2. GLOBAL & RESET STYLES
+/* ------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-default);
+  color: var(--fg-default);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ------------------------------ */
+/* 3. TYPOGRAPHY
+/* ------------------------------ */
+h2 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  color: var(--fg-default);
+}
+
+p {
+  color: var(--fg-muted);
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem;
+}
+
+a {
+  color: var(--accent-blue);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: rgba(59, 130, 246, 0.8);
+}
+
+/* ------------------------------ */
+/* 4. BUTTONS
+/* ------------------------------ */
+.btn {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent-blue);
+  color: var(--fg-accent);
+}
+
+.btn-primary:hover {
+  background-color: rgba(59, 130, 246, 0.9);
+}
+
+/* ------------------------------ */
+/* 5. FORMS (NEW SECTION)
+/* ------------------------------ */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--fg-default);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--bg-default);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--fg-default);
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: var(--fg-muted);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--ring-color);
+}
+
+/* ------------------------------ */
+/* 6. LAYOUT UTILITIES (NEW SECTION)
+/* ------------------------------ */
+.auth-layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 2rem; /* 32px */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 24rem; /* 384px */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* 24px */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn-secondary {
+  background-color: var(--bg-default);
+  color: var(--fg-default);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-subtle);
+}
+
+/* Add as a new section or to Layout Utilities */
+/* ------------------------------ */
+/* 7. MISC COMPONENTS
+/* ------------------------------ */
+.divider {
+  position: relative;
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--border-strong);
+}
+
+.divider span {
+  position: relative;
+  background-color: var(--bg-subtle); /* Same as card background */
+  color: var(--fg-muted);
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Add to a new or existing section in globals.css */
+
+/* Grid layout for the posts page */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem; /* 24px */
+}
+
+@media (min-width: 768px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Styling for the post card component */
+.post-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+}
+
+.post-card h3 {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  color: var(--fg-default);
+}
+
+.post-card .author {
+  font-size: 0.875rem; /* 14px */
+  font-style: italic;
+  color: var(--fg-muted);
+}
+
+.post-card .excerpt {
+  font-size: 0.875rem; /* 14px */
+  color: var(--fg-muted);
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+/* Add to globals.css and remove old layout styles */
+
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Prevents the whole page from scrolling */
+}
+
+.sidebar {
+  flex-shrink: 0; /* Prevents sidebar from shrinking */
+  background-color: var(--bg-subtle);
+  border-right: 1px solid var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-strong);
+  flex-shrink: 0; /* Prevents header from shrinking */
+}
+
+.sidebar-title {
+  margin-bottom: 3px;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: var(--fg-default);
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+/* Use data attributes to control the width */
+.sidebar[data-state="open"] {
+  width: 240px;
+}
+.sidebar[data-state="closed"] {
+  width: 68px;
+}
+
+.main-content-area {
+  margin: 12px;
+  flex-grow: 1;
+  overflow-y: auto; /* This makes the content area scrollable */
+}
+
+/* Keep the rest of your sidebar styles (.sidebar-nav, .nav-item, etc.) */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  color: var(--fg-muted);
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  background-color: #3f3f46;
+  color: var(--fg-default);
+}
+
+.nav-item.active {
+  background-color: var(--accent-blue);
+  color: var(--fg-accent);
+}
+
+.nav-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.75px;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: var(--fg-muted);
+  cursor: pointer;
+  padding: 1rem;
+  border-top: 1px solid var(--border-strong);
+  margin-top: auto; /* Pushes toggle to the bottom */
+}
+
+/* Update this class in your globals.css */
+
+.nav-icon {
+  flex-shrink: 0; /* Prevents icon from shrinking */
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.75px; /* Adjust for desired thickness */
+}
+
+/* Add these styles to your globals.css */
+
+/* ------------------------------ */
+/* 8. MODAL STYLES
+/* ------------------------------ */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it's on top of everything */
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-strong);
+  padding-bottom: 1rem;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  color: var(--fg-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.modal-close-btn:hover {
+  background-color: var(--bg-default);
+  color: var(--fg-default);
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  color: transparent;
+  background: transparent;
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23A1A1AA" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+
+.form-group input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+}
+
+/* Add styles for textarea to the existing .form-group styles */
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--bg-default);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--fg-default);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.form-group textarea::placeholder {
+  color: var(--fg-muted);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--ring-color);
+}
+
+/* Optional animations for the modal */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-strong);
+  flex-shrink: 0;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  width: 18px;
+  height: 18px;
+  color: var(--fg-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  background-color: var(--bg-default);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+  color: var(--fg-default);
+  font-size: 0.875rem;
+  width: 320px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input::placeholder {
+  color: var(--fg-muted);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--ring-color);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.create-post-btn {
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background-color: var(--accent-blue);
+  color: var(--fg-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
+.user-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--fg-default);
+}
+
+/* Add these styles to your globals.css */
+
+.post-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  border-bottom: 1px solid var(--border-strong);
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+  text-decoration: none;
+  width: fit-content; /* Ensures the link is only as wide as its content */
+}
+
+.back-link:hover {
+  color: var(--fg-default);
+  text-decoration: none;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+
+.post-header h1 {
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.5rem;
+}
+
+/* Styles for the main article content */
+.post-content {
+  color: var(--fg-default);
+  line-height: 1.75;
+}
+
+.post-content p,
+.post-content ul,
+.post-content ol {
+  margin-bottom: 1.25rem;
+}
+
+.post-content h2 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.post-content ul,
+.post-content ol {
+  padding-left: 1.5rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem;
+}
+
+.post-content code {
+  font-family: var(--font-mono);
+  background-color: var(--bg-default);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.post-content pre {
+  background-color: var(--bg-default);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+}
+
+.post-content pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* ------------------------------ */
+/* LANDING PAGE STYLES
+/* ------------------------------ */
+
+.landing-page {
+  background-color: var(--bg-default);
+  color: var(--fg-default);
+}
+
+/* --- Header --- */
+.landing-header {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.navbar {
+    padding-left: 24px;
+    padding-right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.landing-header .navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.landing-header .nav-link {
+  color: var(--fg-muted);
+  margin-right: 24px;
+}
+.landing-header .nav-link:hover {
+  color: var(--fg-default);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+  text-align: center;
+  padding: 6rem 0;
+}
+
+.hero-title {
+  font-size: 3rem; /* 48px */
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem; /* 18px */
+  color: var(--fg-muted);
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+}
+
+.hero-cta {
+  margin-top: 2.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  width: auto;
+}
+
+/* --- Features Section --- */
+.features-section {
+  padding: 6rem 0;
+  background-color: var(--bg-subtle);
+  border-top: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 600;
+}
+
+.section-header p {
+  font-size: 1.125rem;
+  color: var(--fg-muted);
+  margin-top: 0.5rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--bg-default);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+}
+
+.feature-icon {
+  display: inline-flex;
+  padding: 1rem;
+  background-color: var(--bg-subtle);
+  border-radius: 9999px;
+  color: var(--accent-blue);
+  margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* --- CTA Section --- */
+.cta-section {
+  text-align: center;
+  padding: 6rem 0;
+}
+
+.cta-section h2 {
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
+.cta-section p {
+  font-size: 1.125rem;
+  color: var(--fg-muted);
+  margin-top: 0.5rem;
+}
+
+/* --- Footer --- */
+.landing-footer {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border-strong);
+  color: var(--fg-muted);
+  font-size: 0.875rem;
+}
+
+/* Add to your globals.css file */
+
+.loading-spinner {
+  width: 1rem; /* 16px */
+  height: 1rem;
+  border: 2px solid var(--fg-muted);
+  border-top-color: var(--fg-default);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* in globals.css */
+[data-sonner-toast] {
+  border-radius: var(--radius);
+  border: 1px solid var(--border-strong);
+  background-color: var(--bg-subtle);
+  color: var(--fg-default);
+}
+
+/* Add to your globals.css */
+
+.skeleton {
+  background-color: var(--bg-subtle);
+  border-radius: var(--radius);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Add to your globals.css */
+
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--bg-default);
+  color: var(--fg-default);
+  padding: 1rem;
+}
+
+.error-card {
+  text-align: center;
+  max-width: 480px;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+}
+
+.error-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--accent-blue); /* Or any color you prefer */
+}
+
+.error-card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.error-card p {
+  color: var(--fg-muted);
+  line-height: 1.75;
+}
+
+/* Add these styles to your globals.css */
+
+.wide-modal {
+  /* Override any previous max-width from .modal-content */
+  max-width: none;
+  
+  /* Set the width with margins */
+  width: calc(100% - 48px); /* 24px margin on each side */
+  
+  /* Set the height with margins and make it scrollable */
+  max-height: calc(100% - 48px);
+  overflow-y: auto;
+}
+
+/* For larger screens, increase the margin */
+@media (min-width: 768px) {
+  .wide-modal {
+    width: calc(100% - 96px); /* 48px margin on each side */
+  }
+}
+
+/* Ensure the modal's content container is relative for positioning the close button */
+.modal-content {
+  position: relative;
+}
+
+/* Position the close button in the top-right corner */
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10; /* Ensure it's above the content */
+}
+
+/* Add to your globals.css */
+
+.dashboard-panels {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column on mobile */
+  gap: 1.5rem; /* 24px */
+  height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-panels {
+    /* Two equal columns on larger screens */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+/* Add to your globals.css */
+
+.panel-title {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+/* User Stats Panel */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+.stat-card {
+  background-color: var(--bg-default);
+  padding: 1rem;
+  border-radius: var(--radius);
+  text-align: center;
+}
+.stat-icon {
+  margin: 0 auto 0.75rem;
+  color: var(--accent-blue);
+}
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* Latest Posts Panel */
+.post-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.post-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: var(--radius);
+  background-color: var(--bg-default);
+  transition: background-color 0.2s ease;
+}
+.post-list-item:hover {
+  background-color: var(--border-strong);
+}
+.post-title {
+  font-weight: 500;
+  color: var(--fg-default);
+}
+.post-category {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  margin-top: 0.25rem;
+}
+
+.comments-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-strong);
+}
+
+.comments-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.add-comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-comment-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--bg-default);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--fg-default);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.add-comment-form button {
+  align-self: flex-end; /* Aligns button to the right */
+}
+
+.comment-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.comment-item {
+  border: 1px solid var(--border-strong);
+  background-color: var(--bg-subtle);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.comment-text {
+  color: var(--fg-default);
+  line-height: 1.75;
+}
+
+.comment-meta {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--border-strong);
+  padding-top: 0.75rem;
+}
+
+.comment-loader {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Add to globals.css and remove old dropdown styles */
+
+.user-profile {
+  /* This ensures all items align nicely in a row */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--bg-default);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--fg-muted);
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.logout-button:hover {
+  color: var(--fg-default);
+  background-color: var(--bg-subtle);
 }
